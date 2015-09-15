@@ -27,24 +27,28 @@ function newGame(){
 
 // get number from user
 function getNumber(){
-	$('#guessButton').click(function(){
+	$('form').submit(function(event){
 		var dataEntered = $('#userGuess').val(); // get value from textbox
 		var isNumber = parseInt(dataEntered); // parse answer to integer
-		console.log(isNumber)
+	
+		if(isNumber){ // is it a number?
+			if((isNumber < 1) || (isNumber > 100)) {
+				$("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
+				event.preventDefault();
+				getNumber();
+			} // else {
+			
+			//}
+		
+			} else {
+			$("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
+			event.preventDefault();
+			getNumber(); // reprompt for a number
+		} 
+
 	});
 	
-/*
-	if(isNumber){ // is it a number?
-		if(isNumber < 15){
-			alert("I thought I said a number greater than 15...");
-			getNumber();
-		} else {
-			fizzbuzz(isNumber); // yes, run fizzbuzz
-		}
-		
-	} else {
-		alert("You did not enter a number. Try again."); // no, try again
-		getNumber(); // reprompt for a number
-	} */
+	
 
 }
+
