@@ -30,25 +30,23 @@ function getNumber(){
 	$('form').submit(function(event){
 		var dataEntered = $('#userGuess').val(); // get value from textbox
 		var isNumber = parseInt(dataEntered); // parse answer to integer
+		$('#userGuess').val('');
 	
 		if(isNumber){ // is it a number?
 			if((isNumber < 1) || (isNumber > 100)) {
 				$("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
 				event.preventDefault();
 				getNumber();
-			} // else {
-			
-			//}
+			} else {
+				$('.guessBox').append("<li>" + isNumber + "</li>");
+				event.preventDefault();
+			}
 		
 			} else {
 			$("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
 			event.preventDefault();
 			getNumber(); // reprompt for a number
 		} 
-
 	});
-	
-	
-
 }
 
