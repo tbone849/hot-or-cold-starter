@@ -1,7 +1,6 @@
-
 $(document).ready(function(){
 	var randomNewNumber = randomizeNumber();
-	getNumber();
+  $('form').submit(onFormSubmitted);
 
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -19,40 +18,29 @@ $(document).ready(function(){
 
 function newGame(){
 
-	
+}
 
-
+// Handle form submission
+function onFormSubmitted (event) {
+  event.preventDefault();
+  var guessedNumber = getNumber();
+  if(isNaN(guessedNumber)) {
+    $("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
+  } else {
+    if(guessedNumber < 1 || guessedNumber > 100) {
+      $("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
+    } else {
+      $('.guessBox').append("<li>" + isNumber + "</li>");
+      $("#feedback").replaceWith("<h2 id='feedback'>Make your Guess!</h2>");
+    }
+  }
 }
 
 // get number from user
 function getNumber(){
-	$('form').submit(function(event){
-		var dataEntered = $('#userGuess').val(); // get value from textbox
-		var isNumber = parseInt(dataEntered); // parse answer to integer
-		$('#userGuess').val('');
-	
-		if(isNumber){ // is it a number?
-			if((isNumber < 1) || (isNumber > 100)) {
-				$("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
-				event.preventDefault();
-				//console.log("Not a number between 1 and 100");
-
-			} else {
-				$('.guessBox').append("<li>" + isNumber + "</li>");
-				$("#feedback").replaceWith("<h2 id='feedback'>Make your Guess!</h2>");
-				event.preventDefault();
-				//console.log("It is a number between 1 and 100");
-				
-			} // end inner if
-		} else {
-			$("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
-			event.preventDefault();
-			//console.log("Not a number at all");
-			 
-		} // end outter if
-	}); // end submit
-} // end getNumber
-
+  var dataEntered = $('#userGuess').val(); // get value from textbox
+  return parseInt(dataEntered); // parse answer to integer
+}
 
 function randomizeNumber(){
 	// generate number between 1 and 100
