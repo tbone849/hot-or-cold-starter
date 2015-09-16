@@ -1,5 +1,6 @@
 
 $(document).ready(function(){
+	var randomNewNumber = randomizeNumber();
 	getNumber();
 
 	/*--- Display information modal box ---*/
@@ -18,8 +19,7 @@ $(document).ready(function(){
 
 function newGame(){
 
-	// generate number between 1 and 100
-	var randomNumber = Math.floor((Math.random() * 10) + 1);
+	
 
 
 }
@@ -49,9 +49,13 @@ function getNumber(){
 			event.preventDefault();
 			//console.log("Not a number at all");
 			 
-		} 
-	});
+		} // end outter if
+	}); // end submit
+} // end getNumber
+
+
+function randomizeNumber(){
+	// generate number between 1 and 100
+	var randomNumber = Math.floor((Math.random() * 100) + 1);
+	return randomNumber;
 }
-
-
-
