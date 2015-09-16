@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  newGame();
 	var randomNewNumber = randomizeNumber();
   $('form').submit(onFormSubmitted);
   
@@ -32,12 +33,20 @@ $(document).ready(function(){
     }
   }
 
+  // Start a new game
+  function newGame(){
+    $('.new').click(function (){
+      $('#feedback').text("Make your Guess!");
+      $('.guessBox li').remove();
+      $('#count').text('0');
+      randomNewNumber = randomizeNumber();
+    });
+  }
+
 });
 
 
-function newGame(){
 
-}
 
 
 
@@ -47,15 +56,17 @@ function getNumber(){
   return parseInt(dataEntered); // parse answer to integer
 }
 
+// make a random number 
 function randomizeNumber(){
 	// generate number between 1 and 100
 	var randomNumber = Math.floor((Math.random() * 100) + 1);
 	return randomNumber;
 }
 
+// compare computer's number with user's
 function compareNumbers(random, guessed){
-  console.log(random);
-  console.log(guessed);
+  //console.log(random);
+  //console.log(guessed);
   var difference = random - guessed;
   var absoluteDif = Math.abs(difference);
   if(random == guessed){
