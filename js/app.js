@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	var randomNewNumber = randomizeNumber();
   $('form').submit(onFormSubmitted);
+  
 
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
@@ -24,14 +25,16 @@ function newGame(){
 function onFormSubmitted (event) {
   event.preventDefault();
   var guessedNumber = getNumber();
+  $('#userGuess').val(''); // empty textbox
   if(isNaN(guessedNumber)) {
-    $("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
+    $("#feedback").text("You did not enter a number.\nPlease try again."); // no, try again
   } else {
-    if(guessedNumber < 1 || guessedNumber > 100) {
-      $("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
+    if(guessedNumber < 1 || guessedNumber > 100) { 
+      $("#feedback").text("You SHOULD enter a number between 1 and 100."); // no, try again
     } else {
-      $('.guessBox').append("<li>" + isNumber + "</li>");
-      $("#feedback").replaceWith("<h2 id='feedback'>Make your Guess!</h2>");
+      $('.guessBox').append("<li>" + guessedNumber + "</li>"); // it is a number between 1 and 100
+      counter();
+      // compareNumbers goes here
     }
   }
 }
@@ -46,4 +49,17 @@ function randomizeNumber(){
 	// generate number between 1 and 100
 	var randomNumber = Math.floor((Math.random() * 100) + 1);
 	return randomNumber;
+}
+
+function compareNumbers(random, guessed){
+  if(random == guessed){
+    $('#feedback').text("You guessed correctly! Way to be awesome");
+  } 
+ 
+}
+
+function counter(){
+  var count = parseInt(($('#count').text()));
+  count++;
+  $('#count').text(count);
 }
