@@ -1,8 +1,7 @@
 
 $(document).ready(function(){
-
 	getNumber();
-	
+
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
@@ -36,17 +35,23 @@ function getNumber(){
 			if((isNumber < 1) || (isNumber > 100)) {
 				$("#feedback").replaceWith("<h2 id='feedback'>You SHOULD enter a number between 1 and 100.</h2>");
 				event.preventDefault();
-				getNumber();
+				//console.log("Not a number between 1 and 100");
+
 			} else {
 				$('.guessBox').append("<li>" + isNumber + "</li>");
+				$("#feedback").replaceWith("<h2 id='feedback'>Make your Guess!</h2>");
 				event.preventDefault();
-			}
-		
-			} else {
+				//console.log("It is a number between 1 and 100");
+				
+			} // end inner if
+		} else {
 			$("#feedback").replaceWith("<h2 id='feedback'>You did not enter a number.</br>Please try again.</h2>"); // no, try again
 			event.preventDefault();
-			getNumber(); // reprompt for a number
+			//console.log("Not a number at all");
+			 
 		} 
 	});
 }
+
+
 
